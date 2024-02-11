@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskForm from "../TodoApp/TaskForm"
 import TaskList from "../TodoApp/TaskList";
 
 const TodoApp = () => {
     const [tasks, setTasks] = useState([]);
+    // Local storage Work
+    useEffect(() => {
+        const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+        if (storedTasks && storedTasks.length > 0) {
+          setTasks(storedTasks);
+        }
+      }, []);
+
+      useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+
+      }, [tasks]);
     // Add Task
     const addTask = (title, priority) => {
         const newTask = {
