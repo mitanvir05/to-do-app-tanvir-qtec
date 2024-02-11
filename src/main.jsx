@@ -6,12 +6,21 @@ import {
 } from "react-router-dom";
 import './index.css'
 import Home from './components/Home';
+import TodoApp from './components/TodoApp/TodoApp';
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
-  },
+    children: [
+      {
+          path: '/',
+          element: <TodoApp></TodoApp>
+      },
+      
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
