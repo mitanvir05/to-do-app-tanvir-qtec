@@ -1,7 +1,9 @@
 const Navbar = () => {
     return (
         <div>
-            <h1>Navbar</h1>
+            <div className="navbar bg-primary text-primary-content">
+                <button className="btn btn-ghost text-xl">Todo App</button>
+            </div>
         </div>
     );
 };
