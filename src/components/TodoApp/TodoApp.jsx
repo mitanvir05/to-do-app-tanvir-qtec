@@ -46,19 +46,28 @@ const TodoApp = () => {
     setTotalTasks(tasks.length);
     const completedTasksCount = tasks.filter(task => task.completed).length;
     setCompletedTasks(completedTasksCount);
-    };
-    // Filter
-    const filterTasks = () => {
-        if (filterPriority === 'all') {
-          setFilteredTasks(tasks);
-        } else {
-          setFilteredTasks(tasks.filter(task => task.priority === filterPriority));
-        }
-      };
+  };
+  // Filter
+  const filterTasks = () => {
+    if (filterPriority === 'all') {
+      setFilteredTasks(tasks);
+    } else {
+      setFilteredTasks(tasks.filter(task => task.priority === filterPriority));
+    }
+  };
 
-      const handlePriorityFilterChange = (e) => {
-        setFilterPriority(e.target.value);
-      };
+  const handlePriorityFilterChange = (e) => {
+    setFilterPriority(e.target.value);
+  };
+  //   Edit
+  const editTask = (taskId, newTitle, newPriority) => {
+    setTasks(tasks.map(task => {
+      if (task.id === taskId) {
+        return { ...task, title: newTitle, priority: newPriority };
+      }
+      return task;
+    }));
+  };
   // Delete
   const deleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
@@ -73,16 +82,17 @@ const TodoApp = () => {
       <div className='text-center'>
         <label>Filter by Priority: </label>
         <select value={filterPriority} onChange={handlePriorityFilterChange} className="select select-bordered join-item">
-            <option value="all">All</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+          <option value="all">All</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
         </select>
       </div>
       <TaskList
         tasks={filteredTasks}
         toggleTaskStatus={toggleTaskStatus}
         deleteTask={deleteTask}
+        editTask={editTask}
       />
 
     </div>
