@@ -4,6 +4,8 @@ import TaskList from "../TodoApp/TaskList";
 
 const TodoApp = () => {
   const [tasks, setTasks] = useState([]);
+  const [totalTasks, setTotalTasks] = useState(0);
+  const [completedTasks, setCompletedTasks] = useState(0);
   // Local storage Work
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -14,7 +16,7 @@ const TodoApp = () => {
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-
+    updateTaskCounters();
 
   }, [tasks]);
   // Add Task
@@ -36,8 +38,18 @@ const TodoApp = () => {
       return task;
     }));
   };
+  //Counter
+  const updateTaskCounters = () => {
+    setTotalTasks(tasks.length);
+    const completedTasksCount = tasks.filter(task => task.completed).length;
+    setCompletedTasks(completedTasksCount);
+  };
   return (
     <div className='space-y-4 mt-10 my-5' >
+      <div className="flex items-center justify-center space-x-4">
+        <div><span className='font-bold'>Total Tasks:</span> {totalTasks}</div>
+        <div><span className='font-bold'>Completed Tasks:</span> {completedTasks}</div>
+      </div>
       <TaskForm onSubmit={addTask} />
       <TaskList
         tasks={tasks}
