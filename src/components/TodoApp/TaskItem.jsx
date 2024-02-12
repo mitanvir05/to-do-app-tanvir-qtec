@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TaskItem = ({ task, toggleTaskStatus, deleteTask, editTask }) => {
-
+  const notify = () => toast("Task Deleted Successfully");
   const [title, setTitle] = useState(task.title);
   const [editing, setEditing] = useState(false);
   const [priority, setPriority] = useState(task.priority);
@@ -79,7 +81,12 @@ const TaskItem = ({ task, toggleTaskStatus, deleteTask, editTask }) => {
               {task.completed ? 'Incomplete' : 'Complete'}
             </button>
             <button onClick={handleEdit} className="btn btn-info btn-xs">Edit</button>
-            <button onClick={handleDelete} className="btn btn-error btn-xs">Delete</button>
+            <button onClick={() => {
+              handleDelete();
+              notify();
+            }} className="btn btn-error btn-xs">Delete</button>
+
+            <ToastContainer />
           </div>
         )
       }
