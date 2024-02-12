@@ -53,7 +53,7 @@ const TaskItem = ({ task, toggleTaskStatus, deleteTask, editTask }) => {
 
   return (
 
-    <div className="">
+    <div>
       {
         editing ? (
           <div className="space-x-2 space-y-3 ">

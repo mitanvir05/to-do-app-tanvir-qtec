@@ -73,13 +73,11 @@ const TodoApp = () => {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
   return (
-    <div className='space-y-4 mt-10 my-5 ' >
-      <div className="flex items-center justify-center space-x-4">
-        <div><span className='font-bold'>Total Tasks:</span> {totalTasks}</div>
-        <div><span className='font-bold'>Completed Tasks:</span> {completedTasks}</div>
-      </div>
+    
+    <div className='p-6 card w-full bg-base-300 shadow-xl mt-5 my-5' >
+      
       <TaskForm onSubmit={addTask} />
-      <div className='text-center'>
+      <div className='text-center mt-5'>
         <label>Filter by Priority: </label>
         <select value={filterPriority} onChange={handlePriorityFilterChange} className="select select-bordered join-item">
           <option value="all">All</option>
@@ -87,6 +85,11 @@ const TodoApp = () => {
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
+        <div className="flex items-center justify-center mt-5 space-x-4"> 
+        <div><span className='font-bold'>Total Tasks:</span> {totalTasks}</div>
+        <div><span className='font-bold'>Completed Tasks:</span> {completedTasks}</div>
+      </div>
+       
       </div>
       <TaskList
         tasks={filteredTasks}
