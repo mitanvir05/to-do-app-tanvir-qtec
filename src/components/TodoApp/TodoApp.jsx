@@ -44,6 +44,10 @@ const TodoApp = () => {
     const completedTasksCount = tasks.filter(task => task.completed).length;
     setCompletedTasks(completedTasksCount);
   };
+   // Delete
+   const deleteTask = (taskId) => {
+    setTasks(tasks.filter(task => task.id !== taskId));
+  };
   return (
     <div className='space-y-4 mt-10 my-5' >
       <div className="flex items-center justify-center space-x-4">
@@ -54,6 +58,7 @@ const TodoApp = () => {
       <TaskList
         tasks={tasks}
         toggleTaskStatus={toggleTaskStatus}
+        deleteTask={deleteTask}
       />
 
     </div>
